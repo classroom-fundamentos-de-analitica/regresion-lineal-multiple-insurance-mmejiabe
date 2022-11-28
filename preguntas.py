@@ -64,7 +64,8 @@ def pregunta_03():
     -------------------------------------------------------------------------------------
     """
 
-    # Importe make_column_selector
+    
+     # Importe make_column_selector
     # Importe make_column_transformer
     # Importe SelectKBest
     # Importe f_regression
@@ -91,9 +92,9 @@ def pregunta_03():
                 make_column_transformer(
                     (
                         OneHotEncoder(),
-                        make_column_selector(dtype_include=object),
+                        make_column_selector(dtype_include = object),
                     ),
-                    remainder='passthrough',
+                    remainder = "passthrough",
                 ),
             ),
             # Paso 2: Construya un selector de características que seleccione las K
@@ -105,7 +106,7 @@ def pregunta_03():
             # Paso 3: Construya un modelo de regresión lineal.
             (
                 "linearRegression",
-                LinearRegression()
+                LinearRegression(),
             ),
         ],
     )
@@ -116,19 +117,19 @@ def pregunta_03():
     # Defina un diccionario de parámetros para el GridSearchCV. Se deben
     # considerar valores desde 1 hasta 11 regresores para el modelo
     param_grid = {
-        'selectkBest_k': range(1, 11),
+        "selectKBest__k": range(1, 11),
     }
 
     # Defina una instancia de GridSearchCV con el pipeline y el diccionario de
     # parámetros. Use cv = 5, y como métrica de evaluación el valor negativo del
     # error cuadrático medio.
     gridSearchCV = GridSearchCV(
-        estimator=pipeline,
-        param_grid=param_grid,
-        cv=5,
-        scoring='neg_mean_squared_error',
-        refit=True,
-        return_train_score=False,
+        estimator = pipeline,
+        param_grid = param_grid,
+        cv = 5,
+        scoring = "neg_mean_squared_error",
+        refit = True,
+        return_train_score = False,
     )
 
     # Búsque la mejor combinación de regresores
